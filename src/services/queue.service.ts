@@ -36,3 +36,5 @@ export const queueEmailJob = async (payload: EmailJobPayload) : Promise<string> 
         throw new Error('Failed to add job to queue');
     }
 }
+
+export {emailQueue};
