@@ -15,3 +15,24 @@ interface EmailJobPayload {
     requestedAt: string;
 }
 
+export const queueEmailJob = async (payload: EmailJobPayload) : Promise<string> => {
+    const jobId = `email_${uuidv4()}`;
+
+    try {
+        await emailQueue.add(jobId, payload, {
+            jobId,
+            attempts: 3,
+            backoff: {
+                type: 'exponential',
+                delay: 2000
+            },
+            removeOnComplete: true,
+            removeOnFail: false
+
+        });
+        return jobId;
+    } catch (error) {
+        console.error('Failed to add job to queue', error);
+        throw new Error('Failed to add job to queue');
+    }
+}
