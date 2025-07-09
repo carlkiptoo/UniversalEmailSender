@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {sendEmailController} from "../controllers/sendEmail.controller";
+import {sendEmailController} from "../controllers/email.controller";
 import {validateEmail} from "../middlewares/validateEmail.middleware";
 import {authenticate} from "../middlewares/authenticate.middleware";
 
