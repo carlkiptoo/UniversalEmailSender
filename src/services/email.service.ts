@@ -1,6 +1,7 @@
 import { get } from 'http';
 import {getProviderAdapter} from '../providers/base.adapter';
 
+
 interface SendEmailPayload {
     to: string[];
     from: string;

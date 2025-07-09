@@ -3,10 +3,17 @@ import {emailQueue} from '../services/queue.service';
 import {renderTemplate} from '../services/template.service';
 import {sendEmailViaProvider} from '../services/email.service';
 import IORedis from "ioredis";
+import dotenv from 'dotenv';
 
-const connection = new IORedis(process.env.REDIS_URL || 'redis://localhost:6379');
+dotenv.config();
 
+const connection = new IORedis(process.env.REDIS_URL || 'redis://localhost:6379', {
+  maxRetriesPerRequest: null
+});
+
+console.log('worker started');
 const worker = new Worker(
+    
     'email-queue',
     async (job: Job) => {
         const {to, from, subject, template, variables} = job.data;

@@ -13,9 +13,9 @@ app.use(helmet());
 app.use(express.json());
 
 
-app.use('v1/send', sendEmailRoute);
+app.use('/v1/send', sendEmailRoute);
 
-app.get('v1/health', (req, res) => {
+app.get('/v1/health', (req, res) => {
     res.status(200).json({status: 'OK', service:'Email Sender'})
 
 });
