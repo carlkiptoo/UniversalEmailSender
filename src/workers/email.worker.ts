@@ -22,3 +22,9 @@ const worker = new Worker(
     {connection}
 );
 
+worker.on('failed', (job, err) => {
+    console.error(`Job ${job?.id} failed with error ${err.message}`);
+})
+worker.on('completed', (job) => {
+    console.log(`Job ${job?.id} completed`);
+})
