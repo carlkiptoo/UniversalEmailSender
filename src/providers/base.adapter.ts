@@ -9,15 +9,15 @@ export interface EmailProvider {
 }
 
 import {smtpAdapter} from './smtp.adapter';
-// import {sesAdapter} from './ses.adapter';
+import {sesAdapter} from './ses.adapter';
 // import {sendgridAdapter} from './sendgrid.adapter';
 
 export const getProviderAdapter = (type: string): EmailProvider => {
     switch (type) {
         case 'smtp':
             return smtpAdapter;
-        // case 'ses':
-        //     return sesAdapter;
+        case 'ses':
+            return sesAdapter;
         // case 'sendgrid':
         //     return sendgridAdapter;
         default:
