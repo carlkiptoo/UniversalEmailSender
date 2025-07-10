@@ -1,6 +1,4 @@
-import { get } from 'http';
-import {getProviderAdapter} from '../providers/base.adapter';
-
+import { getProviderChain } from '../providers/provider.chain';
 
 interface SendEmailPayload {
     to: string[];
@@ -15,12 +13,22 @@ export const sendEmailViaProvider = async ({
     subject,
     html
 }: SendEmailPayload): Promise<void> => {
-    try {
-        const provider = getProviderAdapter(process.env.PROVIDER || 'smtp');
-        await provider.send({to, from, subject, html});
-    } catch(error:  any) {
-        console.error('Failed to send email via provider', error);
-        throw new Error('Failed to send email via provider');
+    const providers = getProviderChain();
+
+    let lastError: any = null;
+
+
+    for (const provider of providers) {
+        try {
+            await provider.send({ to, from, subject, html });
+            console.log(`Email sent successfully via ${provider.constructor.name}`);
+            return;
+        } catch (error: any) {
+            lastError = error;
+            console.error('Failed to send email via provider', error);
+        }
     }
+
+      throw new Error(`All email providers failed. Last error: ${lastError?.message || lastError}`);
 
 }
