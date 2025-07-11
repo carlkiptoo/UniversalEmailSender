@@ -101,18 +101,10 @@ Returns the health status of the service.
 * **MongoDB / Mongoose** - Logging
 * **Nodemailer, AWS SDK** - Email providers
 
-## Testing (coming soon)
-
-You can test email delivery using tools like:
-
-* Mailtrap (for SMTP)
-* Amazon SES (sandbox)
-* Logs in `email-service.emaillogs` collection (MongoDB)
 
 ## License
 
 MIT
 
-## Want to Contribute?
-
-PRs welcome! Let me know if you want to add more email providers or improve performance.
+## Author
+Kiptoo Kirui
