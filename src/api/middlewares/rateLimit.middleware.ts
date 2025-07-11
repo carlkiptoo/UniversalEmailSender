@@ -19,7 +19,7 @@ export const rateLimitMiddleware = rateLimit({
         prefix: 'email-rate-limit'
     }),
     windowMs: 15 * 60 * 1000,
-    max: 10,
+    max: 100,
     message: {
         status: 429,
         message: 'Too many requests, please try again later'

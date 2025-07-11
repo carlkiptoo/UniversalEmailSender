@@ -2,12 +2,14 @@ import express from "express";
 import helmet from "helmet";
 import dotenv from "dotenv";
 import sendEmailRoute from "./api/routes/sendEmail.route";
-
+import { connectToDb } from "./models/db";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+connectToDb();
 
 app.use(helmet());
 app.use(express.json());

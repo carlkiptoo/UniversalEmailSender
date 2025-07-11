@@ -1,9 +1,11 @@
 export interface EmailProvider {
+    name: string;
     send(payload: {
         to: string[];
         from: string;
         subject: string;
         html: string;
+        
 
     }): Promise<void>;
 }

@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import {EmailProvider} from './base.adapter';
+import { EmailProvider } from './base.adapter';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import dotenv from 'dotenv';
 
@@ -24,7 +24,8 @@ const smtpConfig: SMTPTransport.Options = {
 const transporter = nodemailer.createTransport(smtpConfig);
 
 export const smtpAdapter: EmailProvider = {
-    send: async ({to, from, subject, html}) => {
+    name: 'SMTP Adapter',
+    send: async ({ to, from, subject, html }) => {
         await transporter.sendMail({
             from,
             to,

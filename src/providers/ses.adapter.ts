@@ -13,6 +13,7 @@ const sesClient = new SESClient({
 });
 
 export const sesAdapter: EmailProvider = {
+    name: 'SES Adapter',
     send: async ({ to, from, subject, html }) => {
         const command = new SendEmailCommand({
             Source: from,
